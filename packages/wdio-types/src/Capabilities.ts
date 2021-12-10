@@ -410,7 +410,11 @@ export interface AppiumW3CCapabilities {
      * + xctrace device name, which comes from 'xcrun xctrace list devices' command. (since Xcode 12)
      *
      * ### For Android, this capability is currently ignored, though it remains required.
-     * Note: This document is written with appium 1.22.1 release, this behavior may changed later.
+     *
+     * The name of the device under test (actually, it is not used to select a device under test).
+     * Consider setting 'appium:udid' for real devices and 'appium:avd' for emulators instead.
+     *
+     * @see https://github.com/appium/appium/issues/16237
      */
     'appium:deviceName'?: string;
     /**
@@ -432,7 +436,15 @@ export interface AppiumW3CCapabilities {
     'appium:language'?: string;
     'appium:locale'?: string;
     /**
-     * iOS Unique Device Identifier
+     * Unique Device Identifier of the device to be tested. <br/>
+     * For android, it could be retrieved from `adb devices -l` output. <br/>
+     * For iOS, it could be retrieved from Xcode->Window->Devices and Simulators window. <br/>
+     * If unset then the driver will try to use the first connected device. <br/>
+     * Always set this capability if you run parallel tests.
+     *
+     * @see https://github.com/appium/appium/issues/16237
+     * @see https://github.com/appium/appium-uiautomator2-driver#general
+     * @see https://github.com/appium/appium-xcuitest-driver#general
      */
     'appium:udid'?: string;
     'appium:orientation'?: string;
